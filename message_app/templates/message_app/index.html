@@ -11,16 +11,21 @@
     {% block content %}
     <div class="container">
         <h1> Describe your problem </h1>
+        </br>
+        <ul class="messages">
+            {% for message in messages %}
+                <li {% if message.tags %} class="alert alert-{{message.tags}}" {% endif %} >
+                    {{ message }}
+                </li>
+            {% endfor %}
+        </ul>
+        </br>
         <form action = "" method = "post">
             {% csrf_token %}
             {{ message_form|crispy }}
             <button type="submit" class="btn btn-success">Save person</button>
         </form>
-        <ul class="messages">
-            {% for message in messages %}
-                <li {% if message.tags %} class="{{ message.tags }}" {% endif %} > {{ message }} </li>
-            {% endfor %}
-        </ul>
+
     </div>
     {% endblock %}
 </body>
