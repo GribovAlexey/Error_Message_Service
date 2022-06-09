@@ -9,8 +9,8 @@ def index_view(request):
     if request.method == "POST":
         message_form = MessageForm(request.POST)
         if message_form.is_valid():
-            message_form.save()
-            send_message(message_form.cleaned_data)
+            instance = message_form.save()
+            send_message.delay(instance.pk)
             messages.success(request, "Report successfully sent")
         else:
             messages.error(request, "Invalid form")

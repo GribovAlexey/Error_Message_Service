@@ -21,9 +21,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ['SECRET_KEY']
 
-
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ['DEBUG']
+DEBUG = True if os.environ['DEBUG'] == "True" else False
 
 ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', "").split(",")
 
@@ -38,7 +37,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'message_app.apps.MessagesConfig',
     'crispy_forms',
-    # 'djcelery_email',
 ]
 
 DEFAULT_FROM_EMAIL = os.environ['DEFAULT_FROM_EMAIL']
@@ -135,5 +133,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-REDIS_HOST = os.environ['REDIS_HOST']
-REDIS_PORT = os.environ['REDIS_PORT']
+REDIS_URL = os.environ['REDIS_URL']

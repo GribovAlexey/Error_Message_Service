@@ -1,18 +1,18 @@
-from celery import Celery
 from celery.utils.log import get_task_logger
-
+from django.conf import settings
 from django.core.mail import send_mail
 
-from Message_service.settings import DEFAULT_FROM_EMAIL, EMAIL_HOST_USER, REDIS_HOST, REDIS_PORT
+import my_celery
+from .models import Message
 
-app = Celery('sending_task', broker=f'redis://{REDIS_HOST}:{REDIS_PORT}/0')
 logger = get_task_logger(__name__)
 
 
-@app.task
-def send_message(message):
-    subject = message['user_report']
-    message_text = f"From {message['user_name']} with email {message['user_email']} got message {message['message']}"
-    from_email = DEFAULT_FROM_EMAIL
-    to = EMAIL_HOST_USER
+@my_celery.app.task
+def send_message(pk):
+    my_message = Message.objects.get(pk=pk)
+    subject = my_message.user_report
+    message_text = f"From {my_message.user_name} with email {my_message.user_email} got message {my_message.message}"
+    from_email = settings.DEFAULT_FROM_EMAIL
+    to = settings.EMAIL_HOST_USER
     send_mail(subject, message_text, from_email, [to])
