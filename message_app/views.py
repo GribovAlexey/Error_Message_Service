@@ -1,11 +1,8 @@
 from django.contrib import messages
-from django.core.mail import send_mail, get_connection
 from django.shortcuts import render, redirect
-from django.template.loader import render_to_string
-from django.utils.html import strip_tags
 
-from Message_service.settings import EMAIL_HOST_USER, DEFAULT_FROM_EMAIL
 from .forms import MessageForm
+from .tasks import send_message
 
 
 def index_view(request):
@@ -24,6 +21,7 @@ def index_view(request):
                   context={'message_form': message_form, })
 
 
+'''
 def send_message(message):
     subject = message['user_report']
     message_text = f"From {message['user_name']} with email {message['user_email']} got message {message['message']}"
@@ -31,3 +29,4 @@ def send_message(message):
     to = EMAIL_HOST_USER
     with get_connection() as connection:
         send_mail(subject, message_text, from_email, [to], connection=connection)
+'''
