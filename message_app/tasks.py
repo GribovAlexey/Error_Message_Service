@@ -3,9 +3,9 @@ from celery.utils.log import get_task_logger
 
 from django.core.mail import send_mail
 
-from Message_service.settings import DEFAULT_FROM_EMAIL, EMAIL_HOST_USER
+from Message_service.settings import DEFAULT_FROM_EMAIL, EMAIL_HOST_USER, REDIS_HOST, REDIS_PORT
 
-app = Celery('sending_task', broker='redis://localhost:6379/0')
+app = Celery('sending_task', broker=f'redis://{REDIS_HOST}:{REDIS_PORT}/0')
 logger = get_task_logger(__name__)
 
 
