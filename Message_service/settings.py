@@ -10,21 +10,22 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
-
+print(os.environ)
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-)^ec4#$rrxi-t3qv&^yg)p_tzht)jbkad+dft$mm=!s8ve229s'
+SECRET_KEY = os.environ['SECRET_KEY']
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ['DEBUG']
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', "").split(",")
 
 # Application definition
 
@@ -37,8 +38,17 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'message_app.apps.MessagesConfig',
     'crispy_forms',
-    'djcelery_email',
+    # 'djcelery_email',
 ]
+
+DEFAULT_FROM_EMAIL = os.environ['DEFAULT_FROM_EMAIL']
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.yandex.ru'
+EMAIL_HOST_USER = os.environ['EMAIL_HOST_USER']
+EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD']
+EMAIL_PORT = 465
+EMAIL_USE_TLS = False
+EMAIL_USE_SSL = True
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -76,10 +86,10 @@ WSGI_APPLICATION = 'Message_service.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'messages_db',
-        'USER': 'm_admin',
-        'PASSWORD': '1320',
-        'HOST': '127.0.0.1',
+        'NAME': os.environ['DB_NAME'],
+        'USER': os.environ['DB_USER'],
+        'PASSWORD': os.environ['DB_PASSWORD'],
+        'HOST': os.environ['DB_HOST'],
         'PORT': '5432',
     }
 }
@@ -124,5 +134,3 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
-
-EMAIL_BACKEND = 'djcelery_email.backends.CeleryEmailBackend'
