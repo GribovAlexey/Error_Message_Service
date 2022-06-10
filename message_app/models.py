@@ -19,3 +19,5 @@ class Message(models.Model):
         default=OTHER_ERROR,
     )
     message = models.TextField()
+    message_sent = models.BooleanField(default=True, )
+    message_sent_error = models.TextField(default="", )
