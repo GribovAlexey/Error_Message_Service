@@ -1,5 +1,6 @@
 from django import forms
 from .models import Message
+from django.utils.translation import gettext_lazy as _
 
 
 class MessageForm(forms.ModelForm):
@@ -13,11 +14,11 @@ class MessageForm(forms.ModelForm):
             'message',
         )
         widgets = {
-            'user_name': forms.TextInput(attrs={'placeholder': 'Alexey'}),
+            'user_name': forms.TextInput(attrs={'placeholder': _('Alexey')}),
             'user_phone': forms.TextInput(
                 attrs={'placeholder': '+7(911)111-11-11'}),
             'user_email': forms.TextInput(
                 attrs={'placeholder': 'alexey@gmail.com'}),
             'message': forms.Textarea(
-                attrs={'placeholder': 'Your message here'}),
+                attrs={'placeholder': _('Your message here')}),
         }

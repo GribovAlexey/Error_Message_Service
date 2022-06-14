@@ -1,5 +1,7 @@
 from django.db import models
 from django.core.validators import RegexValidator
+from django.utils.translation import gettext_lazy as _
+
 
 phone_validation = RegexValidator(
     regex=r'[+]\d[(]\d{3}[)]\d{3}[-]\d{2}[-]\d{2}',
@@ -13,18 +15,19 @@ class Message(models.Model):
     SEND_ERROR = "SE"
     OTHER_ERROR = "OE"
     report_type = [
-        (RECEIVE_ERROR, "Receive error"),
-        (SEND_ERROR, "Send error"),
-        (OTHER_ERROR, "Other error"),
+        (RECEIVE_ERROR, _("Receive error")),
+        (SEND_ERROR, _("Send error")),
+        (OTHER_ERROR, _("Other error")),
     ]
-    user_name = models.CharField(max_length=30, )
-    user_phone = models.CharField(max_length=20, validators=[phone_validation])
-    user_email = models.EmailField()
+    user_name = models.CharField(_("name"), max_length=30, )
+    user_phone = models.CharField(_("phone"),max_length=20, validators=[phone_validation])
+    user_email = models.EmailField(_('email'))
     user_report = models.CharField(
+        _("report type"),
         max_length=2,
         choices=report_type,
         default=OTHER_ERROR,
     )
-    message = models.TextField()
+    message = models.TextField(_('message'))
     message_sent = models.BooleanField(default=True, )
     message_sent_error = models.TextField(default="", )

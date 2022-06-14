@@ -1,0 +1,81 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-06-14 18:43+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
+"%100>=11 && n%100<=14)? 2 : 3);\n"
+
+#: forms.py:17
+msgid "Alexey"
+msgstr "Алексей"
+
+#: forms.py:23
+msgid "Your message here"
+msgstr "Введите ваше сообщение"
+
+#: models.py:18
+msgid "Receive error"
+msgstr "Ошибка получения"
+
+#: models.py:19
+msgid "Send error"
+msgstr "Ошибка отправки"
+
+#: models.py:20
+msgid "Other error"
+msgstr "Другая ошибка"
+
+#: models.py:22
+msgid "name"
+msgstr "имя"
+
+#: models.py:23
+msgid "phone"
+msgstr "телефон"
+
+#: models.py:24
+msgid "email"
+msgstr "емейл"
+
+#: models.py:26
+msgid "report type"
+msgstr "тип ошибки"
+
+#: models.py:31
+msgid "message"
+msgstr "сообщение"
+
+#: templates/message_app/language_switch.html:9
+msgid "Language"
+msgstr "Язык"
+
+#: templates/message_app/message_forms.html:9
+msgid "Describe your problem"
+msgstr "Опишите вашу проблему"
+
+#: templates/message_app/message_forms.html:22
+msgid "Send request"
+msgstr "Отправить сообщение"
+
+#: views.py:16
+msgid "Report successfully sent"
+msgstr "Сообщение отправлено"
+
+#: views.py:18
+msgid "Invalid form"
+msgstr "Форма заполнена не корректно"

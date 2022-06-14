@@ -1,0 +1,26 @@
+{% extends 'message_app/index.html' %}
+{% load i18n %}
+
+
+{% block content %}
+    {% load crispy_forms_tags %}
+    <h1> {{ LANGUAGE_CODE }}</h1>
+    <div class="container">
+        <h1> {% translate "Describe your problem" %} </h1>
+        </br>
+        <div class="messages">
+            {% for message in messages %}
+                <div {% if message.tags %} class="alert alert-{{message.tags}}" {% endif %} >
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+        </br>
+        <form action = "" method = "post">
+            {% csrf_token %}
+            {{ message_form|crispy }}
+            <button type="submit" class="btn btn-success"> {% translate "Send request" %}</button>
+        </form>
+
+    </div>
+{% endblock %}
