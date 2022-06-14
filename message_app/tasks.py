@@ -14,7 +14,6 @@ logger = get_task_logger(__name__)
 @my_celery.app.task
 def send_message(pk):
     my_message = Message.objects.get(pk=pk)
-    print()
     html_message = loader.render_to_string(
         'message_app/email_message.html',
         {
@@ -31,7 +30,8 @@ def send_message(pk):
     from_email = settings.DEFAULT_FROM_EMAIL
     to = settings.EMAIL_HOST_USER
     try:
-        send_mail(subject, message, from_email, [to], html_message=html_message)
+        send_mail(subject, message, from_email, [to],
+                  html_message=html_message)
     except Exception:
         my_message.message_send = False
         my_message.message_send_error = traceback.format_exc()

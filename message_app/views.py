@@ -1,8 +1,22 @@
 from django.contrib import messages
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 
 from .forms import MessageForm
 from .tasks import send_message
+
+'''
+def index_view(request):
+    message_form = MessageForm(request.POST)
+    if message_form.is_valid():
+        instance = message_form.save()
+        send_message.delay(instance.pk)
+        messages.success(request, "Report successfully sent")
+    else:
+        messages.error(request, "Invalid form")
+    return render(request=request,
+                  template_name="message_app/index.html",
+                  context={'message_form': message_form, })
+'''
 
 
 def index_view(request):
@@ -13,20 +27,8 @@ def index_view(request):
             send_message.delay(instance.pk)
             messages.success(request, "Report successfully sent")
         else:
-            messages.error(request, "Invalid form")
-
-        return redirect('message_app:index')
-    message_form = MessageForm()
+            messages.error(request, "Invalid form", extra_tags='danger')
+    else:
+        message_form = MessageForm()
     return render(request=request, template_name="message_app/index.html",
                   context={'message_form': message_form, })
-
-
-'''
-def send_message(message):
-    subject = message['user_report']
-    message_text = f"From {message['user_name']} with email {message['user_email']} got message {message['message']}"
-    from_email = DEFAULT_FROM_EMAIL
-    to = EMAIL_HOST_USER
-    with get_connection() as connection:
-        send_mail(subject, message_text, from_email, [to], connection=connection)
-'''

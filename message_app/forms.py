@@ -15,7 +15,7 @@ class MessageForm(forms.ModelForm):
         widgets = {
             'user_name': forms.TextInput(attrs={'placeholder': 'Alexey'}),
             'user_phone': forms.TextInput(
-                attrs={'placeholder': '8 (911) 111-11-11'}),
+                attrs={'placeholder': '+7(911)111-11-11'}),
             'user_email': forms.TextInput(
                 attrs={'placeholder': 'alexey@gmail.com'}),
             'message': forms.Textarea(
