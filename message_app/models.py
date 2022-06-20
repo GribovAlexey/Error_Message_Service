@@ -31,3 +31,6 @@ class Message(models.Model):
     message = models.TextField(_('message'))
     message_sent = models.BooleanField(default=True, )
     message_sent_error = models.TextField(default="", )
+
+    def __str__(self):
+        return f"Message from {self.user_name}"
