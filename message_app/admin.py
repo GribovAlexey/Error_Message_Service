@@ -3,13 +3,13 @@ from .models import Message
 
 
 class MyAdmin(admin.ModelAdmin):
-    list_display = ("user_name", "message_sent")
+    list_display = ("user_name", "is_sent")
 
     def get_fields(self, request, obj=None):
         fields = super().get_fields(request, obj)
-        if obj and obj.message_sent:
+        if obj and obj.is_sent:
             fields = set(fields)
-            fields.remove('message_sent_error')
+            fields.remove('sent_error')
         return fields
 
     def has_add_permission(self, request, obj=None):
