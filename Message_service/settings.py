@@ -16,7 +16,6 @@ import environ
 
 from django.utils.translation import gettext_lazy as _
 
-
 env = environ.Env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -45,6 +44,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "message_app.apps.MessagesConfig",
     "crispy_forms",
+    'rest_framework',
 ]
 
 DEFAULT_FROM_EMAIL = env("DEFAULT_FROM_EMAIL")
@@ -157,3 +157,11 @@ CELERY_TASK_TRACK_STARTED = True
 CELERY_TASK_TIME_LIMIT = 30 * 60
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
+
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
+}

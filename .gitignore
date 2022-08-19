@@ -3,4 +3,3 @@
 __pycache__/
 .env
 *.mo
-message_app/rest_api
