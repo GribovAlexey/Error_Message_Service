@@ -20,7 +20,9 @@ class Message(models.Model):
         _("name"),
         max_length=30,
     )
-    user_phone = models.CharField(_("phone"), max_length=20, validators=[phone_validation])
+    user_phone = models.CharField(
+        _("phone"), max_length=20, validators=[phone_validation]
+    )
     user_email = models.EmailField(_("email"))
     user_report = models.CharField(
         _("report type"),

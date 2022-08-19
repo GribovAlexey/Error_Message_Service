@@ -1,9 +1,14 @@
 from django.urls import path
 
-from . import views
+from . import class_views, views
 
 
 app_name = 'message_app'
 urlpatterns = [
-    path('', views.index_view, name='index'),
+    path('view/', views.index_view, name='index'),
+    path(
+        'class_view/',
+        class_views.MessageFormView.as_view(),
+        name='class_view',
+    ),
 ]

@@ -18,7 +18,7 @@
         </br>
         <form action = "" method = "post">
             {% csrf_token %}
-            {{ message_form|crispy }}
+            {{ form|crispy }}
             <button type="submit" class="btn btn-success"> {% translate "Send request" %}</button>
         </form>
 
