@@ -1,0 +1,14 @@
+[tool.black]
+line-length = 120
+target-version = ['py310']
+include = '\.pyi?$'
+skip-string-normalization = true
+exclude = '''
+(
+    migrations
+    | \.\*
+    | .env
+    | .python-version
+    | message_app/templates
+)
+'''

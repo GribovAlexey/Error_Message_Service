@@ -2,7 +2,6 @@ from django.contrib import messages
 from django.shortcuts import render
 from django.utils.translation import gettext_lazy as _
 
-
 from .forms import MessageForm
 from .tasks import send_message
 
@@ -18,6 +17,10 @@ def index_view(request):
             messages.error(request, _("Invalid form"), extra_tags='danger')
     else:
         message_form = MessageForm()
-    return render(request=request,
-                  template_name="message_app/message_forms.html",
-                  context={'message_form': message_form, })
+    return render(
+        request=request,
+        template_name="message_app/message_forms.html",
+        context={
+            'message_form': message_form,
+        },
+    )
