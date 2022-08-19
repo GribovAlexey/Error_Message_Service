@@ -16,13 +16,10 @@ logger = get_task_logger(__name__)
 
 @celery.app.task
 def send_message(pk):
-    if not (message := Message.objects.get(pk=pk)):
+    if not (message := Message.objects.filter(pk=pk).first()):
         return
-    msg = message.__dict__
-    msg['error'] = message.get_user_report_display()
     html_message = loader.render_to_string(
-        'message_app/email_message.html',
-        msg,
+        'message_app/email_message.html', {'message': message}
     )
 
     try:
