@@ -1,7 +1,8 @@
 from django.core.validators import RegexValidator
-from django.db import models
+from django.db import models, transaction
 from django.utils.translation import gettext_lazy as _
 
+from message_app.tasks import send_message
 
 phone_validation = RegexValidator(
     regex=r"[+]\d[(]\d{3}[)]\d{3}[-]\d{2}[-]\d{2}",
@@ -40,3 +41,23 @@ class Message(models.Model):
 
     def __str__(self):
         return f"Message from {self.user_name}"
+
+    def save(
+        self,
+        force_insert=False,
+        force_update=False,
+        using=None,
+        update_fields=None,
+    ):
+        #TODO ADD transaction.on_commit(send_message)
+        transaction.on_commit(lambda: self.send_mail_async())
+        super().save(force_insert, force_update, using, update_fields)
+
+    #TODO add send_mail method using save, self.id, is_send=false
+    def send_mail_async(self):
+        if self.is_sent is False:
+            send_message.delay(self.pk)
+        return
+
+
+    #TODO delete unnessesary sending after everything higher

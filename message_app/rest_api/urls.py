@@ -4,8 +4,7 @@ from . import views
 
 
 router = routers.DefaultRouter()
-router.register(r'messages', views.MessageViewSet)
 
 urlpatterns = [
-    path('', include(router.urls)),
+    path('message/', views.MessageCreateView.as_view(), name='create_message'),
 ]

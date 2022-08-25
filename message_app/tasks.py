@@ -16,7 +16,10 @@ logger = get_task_logger(__name__)
 
 @celery.app.task
 def send_message(pk):
-    if not (message := Message.objects.filter(pk=pk).first()):
+    if (
+        not (message := Message.objects.filter(pk=pk).first())
+        or message.is_sent is True
+    ):
         return
     html_message = loader.render_to_string(
         'message_app/email_message.html', {'message': message}
@@ -33,4 +36,3 @@ def send_message(pk):
         message.message_send = True
     except Exception:
         message.message_send_error = traceback.format_exc()
-        message.save()
