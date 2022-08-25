@@ -13,7 +13,3 @@ class MessagesSerializer(serializers.ModelSerializer):
             'user_report',
             'text',
         )
-
-    def create(self, validated_data):
-        instance = super().create(validated_data)
-        return instance
