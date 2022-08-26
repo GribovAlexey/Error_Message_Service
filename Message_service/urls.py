@@ -19,6 +19,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
 
+
 urlpatterns = i18n_patterns(
     path("", include("message_app.urls")),
     path('rest/', include('message_app.rest_api.urls')),
