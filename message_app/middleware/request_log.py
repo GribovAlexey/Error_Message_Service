@@ -10,5 +10,5 @@ class RequestTimeLogMiddleware:
         self.get_response = get_response
 
     def __call__(self, request):
-        logger.info(f'Request start at {timezone.now()}')
+        logger.info(f'Request start at {timezone}')
         return self.get_response(request)

@@ -2,6 +2,7 @@ from django.contrib import messages
 from django.shortcuts import render
 from django.utils.translation import gettext_lazy as _
 
+from .context_processor import user_count
 from .forms import MessageForm
 from .tasks import send_message
 
@@ -22,5 +23,6 @@ def index_view(request):
         template_name="message_app/message_forms.html",
         context={
             'form': form,
+            'user_amount': user_count(request),
         },
     )
