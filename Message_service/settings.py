@@ -16,7 +16,6 @@ import environ
 
 from django.utils.translation import gettext_lazy as _
 
-
 env = environ.Env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -66,6 +65,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    'message_app.middleware.request_log.RequestTimeLogMiddleware',
 ]
 
 ROOT_URLCONF = "Message_service.urls"
@@ -166,3 +166,4 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ]
 }
+
